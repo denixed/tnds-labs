@@ -27,9 +27,9 @@
     собственником, отсутствием ремонта в указанном диапазоне цен.
 */
 
-#define LEN_MARQUE 66
-#define LEN_COUNTRY 66
-#define LEN_COLOR 66
+#define LEN_MARQUE 64
+#define LEN_COUNTRY 64
+#define LEN_COLOR 64
 
 #pragma pack(push, 1)
 typedef struct

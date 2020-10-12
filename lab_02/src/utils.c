@@ -102,17 +102,17 @@ void evaluate(cars_t *unsorted_data, keys_t *unsorted_keys) {
       "Тестирование скорости сортировок для %d повторений и %zu элементов:\n",
       EVALUATE_COUNT, data->amount);
 
-  printf("%s - %ld; Объём памяти: %zu\n",
+  printf("%s - %ld тактов; Объём памяти: %zu Байт \n",
          "Быстрая сортировка (основная таблица) ", dur_fs_main / EVALUATE_COUNT,
          fs_main_size);
-  printf("%s - %ld; Объём памяти: %zu\n",
+  printf("%s - %ld тактов; Объём памяти: %zu Байт (осн + доп)\n",
          "Быстрая сортировка (таблица ключей)   ", dur_fs_key / EVALUATE_COUNT,
          fs_key_size);
 
-  printf("%s - %ld; Объём памяти: %zu\n",
+  printf("%s - %ld тактов; Объём памяти: %zu Байт\n",
          "Сортировка выбором (основная таблица) ", dur_ss_main / EVALUATE_COUNT,
          ss_main_size);
-  printf("%s - %ld; Объём памяти: %zu\n",
+  printf("%s - %ld тактов; Объём памяти: %zu Байт (осн + доп)\n",
          "Cортировка выбором (таблица ключей)   ", dur_ss_key / EVALUATE_COUNT,
          ss_key_size);
 }
@@ -216,13 +216,14 @@ void print_start_menu() {
  */
 int input_choice(int *choice) {
   char temp_choice[4] = {0};
+  *choice = -1;
 
   if (!fgets(temp_choice, sizeof(temp_choice), stdin)) return FAIL;
   if (temp_choice[strlen(temp_choice) - 1] != '\n') return FAIL;
   temp_choice[strlen(temp_choice) - 1] = '\0';
 
   if (!strlen(temp_choice))
-    *choice = 0;
+    *choice = -1;
   else {
     if (!is_only_digits(temp_choice)) return FAIL;
     if (strlen(temp_choice) > 1 && temp_choice[0] == '0') return FAIL;
