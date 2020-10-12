@@ -90,22 +90,16 @@ void print(const car_t *a);
 int is_only_digits(char *str);
 int check_int(char *str);
 
-/* Ввести марку */
 int input_marque(car_t *car);
 
-/* Ввести страну */
 int input_country(car_t *car);
 
-/* Ввести цену */
 int input_price(car_t *car);
 
-/* Ввести цвет */
 int input_color(car_t *car);
 
-/* Ввести состояние */
 int input_condition(car_t *car);
 
-/* Ввести характеристики состояния */
 int input_cond_attr(car_t *car);
 
 #endif // CAR_H

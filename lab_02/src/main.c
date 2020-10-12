@@ -1,51 +1,44 @@
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "defines.h"
-#include "utils.h"
-#include "car.h"
-#include "cars.h"
-#include <locale.h>
 #include <time.h>
 
-int main(void)
-{
-    srand(time(NULL));
-    setlocale(LC_ALL, "ru_RU.UTF-8");
+#include "car.h"
+#include "cars.h"
+#include "defines.h"
+#include "utils.h"
 
-    int choice = -1;
-    cars_t data = {0};
-    keys_t key_data = {0};
-    int rc = OK;
+int main(void) {
+  srand(time(NULL));
+  setlocale(LC_ALL, "ru_RU.UTF-8");
 
-    while (choice)
-    {
-        print_start_menu();
-        rc = choice_menu(&data, &key_data, &choice);
+  int choice = -1;
+  cars_t data = {0};
+  keys_t key_data = {0};
+  int rc = OK;
 
-        if (rc >= 1 && rc <= 3)
-            printf("\nНекорректный ввод строки\n");
+  while (choice) {
+    print_start_menu();
+    rc = choice_menu(&data, &key_data, &choice);
 
-        if (rc >= 4 && rc <= 5)
-            printf("\nНекорректный ввод числа\n");
+    if (rc >= 1 && rc <= 3) printf("\nНекорректный ввод строки\n");
 
-        if (rc == ERR_READ_PRICE_RANGE)
-            printf("\nНекорректный ввод диапазона\n");
+    if (rc >= 4 && rc <= 5) printf("\nНекорректный ввод числа\n");
 
-        if (rc == INCORRECT_CHOICE_RANGE || rc == ERR_READ_CAR_CONDITION || rc == ERR_INPUT_CHOICE)
-            printf("\nТакого пункта нет\n");
+    if (rc == ERR_READ_PRICE_RANGE) printf("\nНекорректный ввод диапазона\n");
 
-        if (rc == ERR_OVERFLOW_CARS)
-            printf("\nПроизошло переполнение таблицы\n");
+    if (rc == INCORRECT_CHOICE_RANGE || rc == ERR_READ_CAR_CONDITION ||
+        rc == ERR_INPUT_CHOICE)
+      printf("\nТакого пункта нет\n");
 
-        if (rc == ERR_EMPTY_INPUT)
-            printf("\nПоле не может быть пустым\n");
-        
+    if (rc == ERR_OVERFLOW_CARS) printf("\nПроизошло переполнение таблицы\n");
 
-        printf("\nНажмите <Enter>, чтобы продолжить.");
-        getc(stdin);
-        system("clear");
-    }
+    if (rc == ERR_EMPTY_INPUT) printf("\nПоле не может быть пустым\n");
 
-    return OK;
+    printf("\nНажмите <Enter>, чтобы продолжить.");
+    getc(stdin);
+    system("clear");
+  }
+
+  return OK;
 }

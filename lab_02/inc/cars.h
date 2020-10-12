@@ -39,10 +39,8 @@ void ssort(cars_t *a);
 void write_to_file(FILE *f, cars_t *a);
 void write_line(FILE *f, car_t *car);
 
-/*Добавить автомобиль*/
 int add(cars_t *a);
 
-/*Удалить автомобиль*/
 void delete(cars_t *a, size_t index);
 
 int delete_by_marque(cars_t *a);

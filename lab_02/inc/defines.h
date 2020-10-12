@@ -5,7 +5,7 @@
 #define FAIL 1
 
 
-#define EVALUATE_COUNT 100
+#define EVALUATE_COUNT 500
 /* Error return codes cars.c */
 
 #define ERR_READ_CAR_MARQUE 1
