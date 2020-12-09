@@ -12,7 +12,7 @@
 
 int hash_sum(char *str) {
   int hash = 0;
-  for (char *cur = str; *cur; cur++) hash += *str;
+  for (char *cur = str; *cur; cur++) hash += *cur;
   return hash;
 }
 
