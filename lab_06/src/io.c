@@ -175,6 +175,7 @@ int read_hash_func(hash_func_t *hash) {
   printf("  1. Сумма\n");
   printf("  2. XOR\n");
   printf("  3. Хеширование Пирсона\n");
+  printf("  4. Хеширование djb2\n");
 
   int option = 0;
   if (scanf("%d", &option) != 1) return -1;
@@ -189,7 +190,9 @@ int read_hash_func(hash_func_t *hash) {
     case 3:
       *hash = hash_pearson;
       break;
-
+    case 4:
+      *hash = hash_djb2;
+      break;
     default:
       return -1;
   }
@@ -210,6 +213,8 @@ int hash_table_info_wrapper() {
     printf("xor\n");
   else if (hash_table_global->hasher == hash_pearson)
     printf("Пирсона\n");
+  else if (hash_table_global->hasher == hash_djb2)
+    printf("djb2\n");
 
   printf("Максимальное кол-во коллизий в таблице: %zu\n",
          hash_table_global->max_collision_num);
@@ -279,13 +284,13 @@ int restruct_hash_table_automatic_wrapper() {
   int collision_num = 0;
   if (scanf("%d", &collision_num) != 1 || collision_num < 1) return 0;
   size_t tryes = 0;
-  while (tryes < 100 && hash_table_global->max_collision_num > collision_num) {
+  while (tryes < 40 && hash_table_global->max_collision_num > collision_num) {
     hash_func_t hash = hash_table_global->hasher;
     size_t recomend_size = hash_table_global->elements_count * 0.72;
     if (hash != hash_pearson &&
-        recomend_size * 3 <= hash_table_global->table_size) {
+        recomend_size * 3 <= hash_table_global->table_size)
       hash = hash_pearson;
-    } else if (recomend_size <= hash_table_global->table_size)
+    else if (recomend_size <= hash_table_global->table_size)
       recomend_size = hash_table_global->table_size * 1.2;
 
     recomend_size = next_prime(recomend_size);
@@ -293,8 +298,7 @@ int restruct_hash_table_automatic_wrapper() {
     restruct_hash_table(&hash_table_global, recomend_size, hash);
     tryes++;
   }
-  if (tryes >= 100)
-    printf("Подобрать параметры хэш-таблицы не удалось\n");
+  if (tryes >= 40) printf("Подобрать параметры хэш-таблицы не удалось\n");
 
   clear_input();
   hash_table_info_wrapper();
@@ -401,8 +405,10 @@ void print_menu() {
       {.name = NULL, .action = NULL},
   };
 
-  create_tree_wrapper();
-
+  if (create_tree_wrapper()) {
+    printf("Ошибка открытия файла\n");
+    return;
+  }
   while (1) {
     printf("Меню \n\n");
 

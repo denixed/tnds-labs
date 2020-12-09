@@ -10,7 +10,6 @@
 
 #include <stdlib.h>
 
-
 int hash_sum(char *str) {
   int hash = 0;
   for (char *cur = str; *cur; cur++) hash += *str;
@@ -58,6 +57,22 @@ int hash_pearson(char *str) {
 
     full_hash[j] = hash_byte;
   }
+  int res = *(int *)(void *)full_hash;
+  if (res < 0) res *= -1;
+  if (res < 0) res = 0;
+  if (!res) return hash_sum(str);
 
-  return *(int *)(void *)full_hash;
+  return res;
+}
+
+int hash_djb2(char *str) {
+  unsigned long hash = 5381;
+
+  for (char c = *str; *str; str++) hash = ((hash << 5) + hash) + c;
+
+  int res = hash;
+  if (res < 0) res *= -1;
+  if (res < 0) res = 0;
+
+  return res;
 }

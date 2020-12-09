@@ -15,4 +15,7 @@ int hash_xor(char *str);
 
 int hash_pearson(char *str);
 
+int hash_djb2(char *str);
+
+
 #endif  // INC_HASH_FUNCS_H_
