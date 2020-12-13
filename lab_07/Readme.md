@@ -1,4 +1,4 @@
-# Лабораторная работа №6. "Графы"
+# Лабораторная работа №7. "Графы"
 **Студент** Ларин Владимир - ИУ7-34Б
 
 
@@ -88,15 +88,6 @@ typedef struct graph {
 - `void free_graph(graph_t* graph);` - освобождение графа
 - `int export_dot(FILE* file, graph_t* graph);` - экспорт графа в формате `DOT`
 - `int export_dot_reachability(FILE* file, graph_t* graph, size_t point);` - экспорт информации о дистижимости вершин графа указаной вершиной в формате `DOT`
-
-
-### Хэш-таблица
-
-- `hash_table_t *init_hash_table(size_t, hash_func_t, hash_cmp_t);` - Создание хэш-таблицы
-- `bool add_element_hash_table(hash_table_t *table, hash_type_t element);` - добавление элемента
-- `bool has_element_hash_table(hash_table_t *table, hash_type_t element);` - поиск элемента
-- `int restruct_hash_table(hash_table_t **, size_t new_table_size, hash_func_t);` - реструктуризация хэш таблицы
-- `void free_hash_table(hash_table_t *table);` - Удаление хэш-таблицы
 
 ## Алгоритм
 
