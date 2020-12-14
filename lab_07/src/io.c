@@ -116,8 +116,7 @@ void print_menu() {
     char *name;
     int (*action)(void);
   } actions[] = {
-      {.name = "Перегрузить граф из файла", .action = create_wrapper},
-
+      {.name = "Перестроить граф из файла", .action = create_wrapper},
       {.name = "Показать граф", .action = print_wrapper},
       {.name = "Напечатать матрицы смежности и достижимости",
        .action = print_matrixs_wrapper},
